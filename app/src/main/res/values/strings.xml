@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Spotify Streamer</string>
+    <string name="text_hint">Search...</string>
+    <string name="action_settings">Settings</string>
+    <string name="empty_search">No artists found, please refine your search.</string>
+    <string name="title_activity_top10_activity_ss">Top 10 Tracks</string>
+</resources>
