@@ -3,7 +3,6 @@ package gr.dmaraid.ud853.spotifystreamer;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import kaaes.spotify.webapi.android.models.Image;
 public class FetchArtistsTask extends AsyncTask<String, Void, My_Artist[]> {
 
     private Context context;
-    private String TAG = FetchArtistsTask.class.getSimpleName();
+    //private String TAG = FetchArtistsTask.class.getSimpleName();
     private int searchSize=0;
 
     public FetchArtistsTask(Context context) {
@@ -41,8 +40,6 @@ public class FetchArtistsTask extends AsyncTask<String, Void, My_Artist[]> {
             } else {
                 my_artists = new My_Artist[searchSize];
             }
-
-            Log.i(TAG, "Total: " + searchSize);
 
             List<Artist> listOfArtists = searchArtists.artists.items;
 
