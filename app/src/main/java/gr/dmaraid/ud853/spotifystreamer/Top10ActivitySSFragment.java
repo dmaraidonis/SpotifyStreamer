@@ -41,7 +41,7 @@ public class Top10ActivitySSFragment extends Fragment {
         }
 
         try {
-            top10_data = new FetchTop10Task().execute(artistId).get();
+            top10_data = new FetchTop10Task(getActivity()).execute(artistId).get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
