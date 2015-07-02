@@ -92,8 +92,7 @@ public class FetchTop10Task extends AsyncTask<String, Void, Top10[]> {
             int     exitValue = ipProcess.waitFor();
             return (exitValue == 0);
 
-        } catch (IOException e)          { e.printStackTrace(); }
-        catch (InterruptedException e) { e.printStackTrace(); }
+        } catch (IOException | InterruptedException e)          { e.printStackTrace(); }
 
         return false;
     }

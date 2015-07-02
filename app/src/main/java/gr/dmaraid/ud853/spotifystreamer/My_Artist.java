@@ -1,7 +1,10 @@
 package gr.dmaraid.ud853.spotifystreamer;
 
 
-public class My_Artist {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class My_Artist implements Parcelable {
 
     public My_Artist() {
         super();
@@ -18,6 +21,12 @@ public class My_Artist {
         this.id = id;
     }
 
+    private My_Artist(Parcel in) {
+        icon = in.readString();
+        name = in.readString();
+        id = in.readString();
+    }
+
     // Getters
     public String getName() {
         return name;
@@ -31,4 +40,26 @@ public class My_Artist {
         return id;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(icon);
+        dest.writeString(name);
+        dest.writeString(id);
+    }
+
+    public static final Parcelable.Creator<My_Artist> CREATOR
+            = new Parcelable.Creator<My_Artist>() {
+        public My_Artist createFromParcel(Parcel in) {
+            return new My_Artist(in);
+        }
+
+        public My_Artist[] newArray(int size) {
+            return new My_Artist[size];
+        }
+    };
 }

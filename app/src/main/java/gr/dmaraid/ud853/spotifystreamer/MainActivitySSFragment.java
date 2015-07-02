@@ -25,6 +25,7 @@ public class MainActivitySSFragment extends Fragment {
 
     public static final String EXTRA_ID = MainActivitySSFragment.class.getSimpleName() + "ID";
     public static final String EXTRA_ARTIST = MainActivitySSFragment.class.getSimpleName() + "ARTIST";
+    private static final String KEY = MainActivitySSFragment.class.getSimpleName() + "_KEY";
     //private static final String TAG = MainActivitySSFragment.class.getSimpleName();
     static ArtistAdapter mArtistAdapter;
     ListView list_artists;
@@ -33,6 +34,20 @@ public class MainActivitySSFragment extends Fragment {
     My_Artist myArtist_data[];
 
     public MainActivitySSFragment() {
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            myArtist_data = (My_Artist[]) savedInstanceState.getParcelableArray(KEY);
+            if (myArtist_data != null) {
+                mArtistAdapter = new ArtistAdapter(getActivity(),
+                        R.layout.list_item_ss,
+                        myArtist_data);
+                list_artists.setAdapter(mArtistAdapter);
+            }
+        }
     }
 
     @Override
@@ -91,4 +106,9 @@ public class MainActivitySSFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArray(KEY, myArtist_data);
+    }
 }
