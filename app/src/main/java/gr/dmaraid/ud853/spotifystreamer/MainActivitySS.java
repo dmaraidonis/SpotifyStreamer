@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 public class MainActivitySS extends AppCompatActivity {
 
+    private static final String TAG = MainActivitySS.class.getSimpleName();
     Fragment mContent;
 
     @Override
@@ -18,6 +19,7 @@ public class MainActivitySS extends AppCompatActivity {
             //Restore the fragment's instance
             mContent = getSupportFragmentManager().getFragment(
                     savedInstanceState, "mContent");
+            //Log.v(TAG, "Restoring in activity");
         }
         setContentView(R.layout.activity_main_ss);
     }
@@ -50,5 +52,6 @@ public class MainActivitySS extends AppCompatActivity {
         super.onSaveInstanceState(outState, outPersistentState);
         //Save the fragment's instance
         getSupportFragmentManager().putFragment(outState, "mContent", mContent);
+        //Log.v(TAG, "Saving in activity");
     }
 }

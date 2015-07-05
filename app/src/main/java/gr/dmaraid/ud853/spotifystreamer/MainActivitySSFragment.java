@@ -26,7 +26,7 @@ public class MainActivitySSFragment extends Fragment {
     public static final String EXTRA_ID = MainActivitySSFragment.class.getSimpleName() + "ID";
     public static final String EXTRA_ARTIST = MainActivitySSFragment.class.getSimpleName() + "ARTIST";
     private static final String KEY = MainActivitySSFragment.class.getSimpleName() + "_KEY";
-    //private static final String TAG = MainActivitySSFragment.class.getSimpleName();
+    private static final String TAG = MainActivitySSFragment.class.getSimpleName();
     static ArtistAdapter mArtistAdapter;
     ListView list_artists;
     EditText editText;
@@ -42,6 +42,7 @@ public class MainActivitySSFragment extends Fragment {
         if (savedInstanceState != null) {
             myArtist_data = (My_Artist[]) savedInstanceState.getParcelableArray(KEY);
             if (myArtist_data != null) {
+                //Log.v(TAG, "Restoring in fragment");
                 mArtistAdapter = new ArtistAdapter(getActivity(),
                         R.layout.list_item_ss,
                         myArtist_data);
@@ -61,7 +62,9 @@ public class MainActivitySSFragment extends Fragment {
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                        ((event.getAction() == KeyEvent.ACTION_DOWN &&
+                                event.getKeyCode() == KeyEvent.KEYCODE_ENTER))) {
                     performSearch();
 
                     // hide virtual keyboard
@@ -109,6 +112,7 @@ public class MainActivitySSFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        //Log.v(TAG, "Saving in fragment");
         outState.putParcelableArray(KEY, myArtist_data);
     }
 }
