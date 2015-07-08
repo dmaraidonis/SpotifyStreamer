@@ -11,14 +11,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class ArtistAdapter extends ArrayAdapter<My_Artist> {
+public class ArtistAdapter extends ArrayAdapter<The_Artist> {
 
     private Context context;
     private int layoutResourceId;
-    private My_Artist data[] = null;
+    private The_Artist data[] = null;
     private int icon_size = 170;
 
-    public ArtistAdapter(Context context, int layoutResourceId, My_Artist[] data) {
+    public ArtistAdapter(Context context, int layoutResourceId, The_Artist[] data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -26,8 +26,8 @@ public class ArtistAdapter extends ArrayAdapter<My_Artist> {
     }
 
     @Override
-    public void add(My_Artist my_artist) {
-        data[data.length] = my_artist;
+    public void add(The_Artist the_artist) {
+        data[data.length] = the_artist;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ArtistAdapter extends ArrayAdapter<My_Artist> {
             holder = (ViewHolder) row.getTag();
         }
 
-        My_Artist myArtist = data[position];
+        The_Artist myArtist = data[position];
         holder.text.setText(myArtist.getName());
         Picasso.with(context)
                 .load(myArtist.getIcon())

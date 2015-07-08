@@ -14,7 +14,7 @@ import kaaes.spotify.webapi.android.models.Artist;
 import kaaes.spotify.webapi.android.models.ArtistsPager;
 import kaaes.spotify.webapi.android.models.Image;
 
-public class FetchArtistsTask extends AsyncTask<String, Void, My_Artist[]> {
+public class FetchArtistsTask extends AsyncTask<String, Void, The_Artist[]> {
 
     private Context context;
     //private String TAG = FetchArtistsTask.class.getSimpleName();
@@ -26,7 +26,7 @@ public class FetchArtistsTask extends AsyncTask<String, Void, My_Artist[]> {
     }
 
     @Override
-    protected My_Artist[] doInBackground(String... given_artist) {
+    protected The_Artist[] doInBackground(String... given_artist) {
 
         if (isOnline()) {
             hasInternetAccess = true;
@@ -35,14 +35,14 @@ public class FetchArtistsTask extends AsyncTask<String, Void, My_Artist[]> {
 
             ArtistsPager searchArtists = spotify.searchArtists(given_artist[0]);
 
-            My_Artist my_artists[] = null;
+            The_Artist the_artists[] = null;
 
             searchSize = searchArtists.artists.total;
             if (searchSize > 0) {
                 if (searchSize > searchArtists.artists.limit) {
-                    my_artists = new My_Artist[searchArtists.artists.limit];
+                    the_artists = new The_Artist[searchArtists.artists.limit];
                 } else {
-                    my_artists = new My_Artist[searchSize];
+                    the_artists = new The_Artist[searchSize];
                 }
 
                 List<Artist> listOfArtists = searchArtists.artists.items;
@@ -63,19 +63,19 @@ public class FetchArtistsTask extends AsyncTask<String, Void, My_Artist[]> {
                         }
                     }
 
-                    my_artists[i] = new My_Artist(artist_image, artist_name, artist_id);
-                    //Log.i(TAG, "Name: " + my_artists[i].getName() + ", Image URL: " + my_artists[i].getIcon());
+                    the_artists[i] = new The_Artist(artist_image, artist_name, artist_id);
+                    //Log.i(TAG, "Name: " + the_artists[i].getName() + ", Image URL: " + the_artists[i].getIcon());
                 }
             }
 
-            return my_artists;
+            return the_artists;
         } else {
             return null;
         }
     }
 
     @Override
-    protected void onPostExecute(My_Artist[] my_artists) {
+    protected void onPostExecute(The_Artist[] the_artists) {
         if (!hasInternetAccess) {
             Toast.makeText(context, context.getString(R.string.no_internet_access), Toast.LENGTH_LONG).show();
         } else {

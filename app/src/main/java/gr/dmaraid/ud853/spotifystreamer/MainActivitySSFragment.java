@@ -31,7 +31,7 @@ public class MainActivitySSFragment extends Fragment {
     ListView list_artists;
     EditText editText;
 
-    My_Artist myArtist_data[];
+    The_Artist myArtist_data[];
 
     public MainActivitySSFragment() {
     }
@@ -40,7 +40,7 @@ public class MainActivitySSFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
-            myArtist_data = (My_Artist[]) savedInstanceState.getParcelableArray(KEY);
+            myArtist_data = (The_Artist[]) savedInstanceState.getParcelableArray(KEY);
             if (myArtist_data != null) {
                 //Log.v(TAG, "Restoring in fragment");
                 mArtistAdapter = new ArtistAdapter(getActivity(),

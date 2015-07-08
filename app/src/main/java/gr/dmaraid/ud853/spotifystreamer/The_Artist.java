@@ -4,9 +4,9 @@ package gr.dmaraid.ud853.spotifystreamer;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class My_Artist implements Parcelable {
+public class The_Artist implements Parcelable {
 
-    public My_Artist() {
+    public The_Artist() {
         super();
     }
 
@@ -14,14 +14,14 @@ public class My_Artist implements Parcelable {
     private String name;
     private String id;
 
-    public My_Artist(String icon, String name, String id) {
+    public The_Artist(String icon, String name, String id) {
         super();
         this.icon = icon;
         this.name = name;
         this.id = id;
     }
 
-    private My_Artist(Parcel in) {
+    private The_Artist(Parcel in) {
         icon = in.readString();
         name = in.readString();
         id = in.readString();
@@ -52,14 +52,14 @@ public class My_Artist implements Parcelable {
         dest.writeString(id);
     }
 
-    public static final Parcelable.Creator<My_Artist> CREATOR
-            = new Parcelable.Creator<My_Artist>() {
-        public My_Artist createFromParcel(Parcel in) {
-            return new My_Artist(in);
+    public static final Parcelable.Creator<The_Artist> CREATOR
+            = new Parcelable.Creator<The_Artist>() {
+        public The_Artist createFromParcel(Parcel in) {
+            return new The_Artist(in);
         }
 
-        public My_Artist[] newArray(int size) {
-            return new My_Artist[size];
+        public The_Artist[] newArray(int size) {
+            return new The_Artist[size];
         }
     };
 }
