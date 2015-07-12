@@ -18,15 +18,12 @@ import android.widget.TextView;
 
 import java.util.concurrent.ExecutionException;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class MainActivitySSFragment extends Fragment {
 
     public static final String EXTRA_ID = MainActivitySSFragment.class.getSimpleName() + "ID";
     public static final String EXTRA_ARTIST = MainActivitySSFragment.class.getSimpleName() + "ARTIST";
     private static final String KEY = MainActivitySSFragment.class.getSimpleName() + "_KEY";
-    private static final String TAG = MainActivitySSFragment.class.getSimpleName();
+    //private static final String TAG = MainActivitySSFragment.class.getSimpleName();
     static ArtistAdapter mArtistAdapter;
     ListView list_artists;
     EditText editText;
@@ -34,21 +31,6 @@ public class MainActivitySSFragment extends Fragment {
     The_Artist myArtist_data[];
 
     public MainActivitySSFragment() {
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            myArtist_data = (The_Artist[]) savedInstanceState.getParcelableArray(KEY);
-            if (myArtist_data != null) {
-                //Log.v(TAG, "Restoring in fragment");
-                mArtistAdapter = new ArtistAdapter(getActivity(),
-                        R.layout.list_item_ss,
-                        myArtist_data);
-                list_artists.setAdapter(mArtistAdapter);
-            }
-        }
     }
 
     @Override
@@ -66,11 +48,7 @@ public class MainActivitySSFragment extends Fragment {
                         ((event.getAction() == KeyEvent.ACTION_DOWN &&
                                 event.getKeyCode() == KeyEvent.KEYCODE_ENTER))) {
                     performSearch();
-
-                    // hide virtual keyboard
-                    InputMethodManager imm = (InputMethodManager) getActivity().
-                            getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                    hideKeyborard();
                     return true;
                 }
                 return false;
@@ -90,6 +68,29 @@ public class MainActivitySSFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //Log.v(TAG, "Entering onActivityCreated..");
+        if (savedInstanceState != null) {
+            myArtist_data = (The_Artist[]) savedInstanceState.getParcelableArray(KEY);
+            if (myArtist_data != null) {
+                //Log.v(TAG, "Restoring in fragment's onActivityCreated");
+                mArtistAdapter = new ArtistAdapter(getActivity(),
+                        R.layout.list_item_ss,
+                        myArtist_data);
+                list_artists.setAdapter(mArtistAdapter);
+            }
+        }
+    }
+
+    private void hideKeyborard() {
+        // hide virtual keyboard
+        InputMethodManager imm = (InputMethodManager) getActivity().
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
     private void performSearch() {

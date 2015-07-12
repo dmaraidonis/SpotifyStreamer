@@ -17,7 +17,10 @@ public class Top10ActivitySSFragment extends Fragment {
     ActionBar actionBar;
 
     Top10Adapter mTop10Adapter;
-    String TAG = Top10ActivitySSFragment.class.getSimpleName();
+    Top10 top10_data[] = null;
+
+    private static final String TAG = Top10ActivitySSFragment.class.getSimpleName();
+    private static final String KEY = TAG + "_KEY";
 
     public Top10ActivitySSFragment() {
     }
@@ -29,7 +32,7 @@ public class Top10ActivitySSFragment extends Fragment {
 
         String artistId = "";
         String artist = "";
-        Top10 top10_data[] = null;
+
 
         Intent receivedIntent = getActivity().getIntent();
 
@@ -41,7 +44,11 @@ public class Top10ActivitySSFragment extends Fragment {
         }
 
         try {
-            top10_data = new FetchTop10Task(getActivity()).execute(artistId).get();
+            if (savedInstanceState != null){
+                top10_data = (Top10[]) savedInstanceState.getParcelableArray(KEY);
+            } else {
+                top10_data = new FetchTop10Task(getActivity()).execute(artistId).get();
+            }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -53,5 +60,12 @@ public class Top10ActivitySSFragment extends Fragment {
         listTop10.setAdapter(mTop10Adapter);
 
         return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //Log.v(TAG, "Saving in fragment");
+        outState.putParcelableArray(KEY, top10_data);
     }
 }

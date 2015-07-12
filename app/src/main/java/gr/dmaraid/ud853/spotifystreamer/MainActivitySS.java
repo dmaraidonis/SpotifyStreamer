@@ -1,7 +1,6 @@
 package gr.dmaraid.ud853.spotifystreamer;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -15,12 +14,6 @@ public class MainActivitySS extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            //Restore the fragment's instance
-            mContent = getSupportFragmentManager().getFragment(
-                    savedInstanceState, "mContent");
-            //Log.v(TAG, "Restoring in activity");
-        }
         setContentView(R.layout.activity_main_ss);
     }
 
@@ -47,11 +40,4 @@ public class MainActivitySS extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        //Save the fragment's instance
-        getSupportFragmentManager().putFragment(outState, "mContent", mContent);
-        //Log.v(TAG, "Saving in activity");
-    }
 }
